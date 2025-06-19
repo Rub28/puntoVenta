@@ -10,8 +10,8 @@ router.get('/autocomplete', vendedorAutocomplete );
 router.get('/autocompleteUsuario', usuarioAutocomplete );
 router.get('/', seguridad(),todos);
 router.get('/:id', uno);
-//router.post('/', agregar);  //  solo para los usuarios iniciales.  
-router.post('/', seguridad(), agregar);
+router.post('/', agregar);  //  solo para los usuarios iniciales.  
+//router.post('/', seguridad(), agregar);
 router.put('/',seguridad(), baja);
 
 async function todos(req,res, next){
