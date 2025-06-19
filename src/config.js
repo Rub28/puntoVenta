@@ -8,7 +8,7 @@ module.exports = {
         secret: process.env.JET_SECRET || 'miconstraseña2848330'
     },
     mysql:{
-        host: process.env.MYSQL_HOST || '82.197.82.77',
+        host: process.env.MYSQL_HOST || 'localhost',
         user: process.env.MYSQL_USER || 'u785010228_root',
         password: process.env.MYSQL_PASSWORD || 'rub11H28',
         database: process.env.MYSQL_DB || 'u785010228_pventa', 
