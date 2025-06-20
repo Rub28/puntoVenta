@@ -18,6 +18,7 @@ async function todos(req,res, next){
    try {
       const items = await controlador.todos(req.query)
       respuestas.success(req, res, items, 200)
+      
    } catch (error) {
       next(error)
    }  

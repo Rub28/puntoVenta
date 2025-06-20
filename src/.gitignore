@@ -1,2 +1,5 @@
 node_modules/*
 config-dev.js
+config.js
+src/config-prod.js
+config-prod.js
