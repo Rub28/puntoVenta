@@ -21,7 +21,7 @@ module.exports = {
 
 module.exports = {
     app: {
-        port: process.env.PORT || 4003
+        port: process.env.PORT || 4004
     },
     jwt:{
         secret: process.env.JET_SECRET || 'miconstraseña2848330'
