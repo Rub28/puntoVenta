@@ -44,8 +44,8 @@ const options = {
   };
   
   // Crear el servidor HTTPS
-  https.createServer(options, app).listen(4006, () => {
-    console.log('Servidor HTTPS escuchando en el puerto 4006');
+  https.createServer(options, app).listen(4003, () => {
+    console.log('Servidor HTTPS escuchando en el puerto 4003');
   });
 
 module.exports =app;
