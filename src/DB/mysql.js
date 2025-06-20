@@ -149,7 +149,7 @@ async function actualizar(tabla, data) {
         }
     }
 }
-
+  
 function agregar(tabla, data) {
     console.log(' data: ', data); 
     if (data && data.id == 0) {
@@ -158,7 +158,7 @@ function agregar(tabla, data) {
         return actualizar(tabla, data);
     }
 }  
-
+    
 function agregarArray(tabla, data) {
 
     console.log(' *  data Array : ', data); 

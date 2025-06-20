@@ -1,6 +1,6 @@
 
 require('dotenv') 
-/* 
+
 module.exports = {
     app: {
         port: process.env.PORT || 4001
@@ -16,8 +16,8 @@ module.exports = {
         port: process.env.PORT_BD || 3306  
     }   
 }     
-*/ 
 
+/* 
 module.exports = {
     app: {
         port: process.env.PORT || 4003
@@ -33,3 +33,4 @@ module.exports = {
         port: process.env.PORT_BD || 3306  
     }   
 }         
+*/ 
