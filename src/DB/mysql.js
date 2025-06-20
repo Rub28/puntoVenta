@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-const config = require('../config-prod');
+const config = require('../config');
 
 
 let conexion; 
