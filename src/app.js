@@ -35,9 +35,9 @@ app.use('/api/movimientos/todosMovimientos', movimientos)
 app.use('/api/auth', auth)
 app.use(error);
 
-
+   
 // Cargar los certificados de Let's Encrypt
-
+  
 const options = {
     key: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/privkey.pem')),
     cert: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/fullchain.pem')),
