@@ -22,7 +22,7 @@ module.exports = {
 // Productvo 
 module.exports = {
     app: {
-        port: process.env.PORT || 4007 
+        port: process.env.PORT || 4004 
     },
     jwt:{
         secret: process.env.JET_SECRET || 'miconstraseña2848330'
@@ -35,3 +35,4 @@ module.exports = {
         port: process.env.PORT_BD || 3306  
     }   
 }         
+  
