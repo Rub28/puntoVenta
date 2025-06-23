@@ -39,8 +39,8 @@ app.use(error);
 // Cargar los certificados de Let's Encrypt
   
 const options = {
-    key: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/privkey.pem')),
-    cert: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/fullchain.pem')),
+    key: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/privkey2.pem')),
+    cert: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/fullchain2.pem')),
   };
   
   // Crear el servidor HTTPS
