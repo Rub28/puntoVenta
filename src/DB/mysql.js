@@ -276,8 +276,8 @@ async function Movimientos(tabla, data) {
                         INNER JOIN users AS u 
                                 ON  m.id_vendedor = u.id              
                         INNER JOIN tipo_pago AS p 
-                                ON  m.id_pago = p.id               
-                        INNER JOIN Tipo_entrega AS e 
+                                ON  m.id_pago = p.id             
+                        INNER JOIN tipo_entrega AS e 
                                 ON  m.id_entrega = e.id      
                         INNER JOIN Productos AS pr 
                                 ON  m.id_producto = pr.id                  
@@ -303,7 +303,7 @@ async function Movimientos(tabla, data) {
                                 ON  m.id_vendedor = u.id              
                         INNER JOIN tipo_pago AS p 
                                 ON  m.id_pago = p.id               
-                        INNER JOIN Tipo_entrega AS e 
+                        INNER JOIN tipo_entrega AS e 
                                 ON  m.id_entrega = e.id      
                         INNER JOIN Productos AS pr
                                 ON  m.id_producto = pr.id                  
@@ -324,7 +324,7 @@ async function Movimientos(tabla, data) {
                                         ON  m.id_vendedor = u.id              
                                 INNER JOIN tipo_pago AS p 
                                         ON  m.id_pago = p.id               
-                                INNER JOIN Tipo_entrega AS e 
+                                INNER JOIN tipo_entrega AS e 
                                         ON  m.id_entrega = e.id      
                                 INNER JOIN Productos AS pr
                                         ON  m.id_producto = pr.id                  
@@ -392,7 +392,7 @@ async function MovimientosPorPeriodo (tabla, data) {
                                 ON  m.id_vendedor = u.id              
                         INNER JOIN tipo_pago AS p 
                                 ON  m.id_pago = p.id               
-                        INNER JOIN Tipo_entrega AS e 
+                        INNER JOIN tipo_entrega AS e 
                                 ON  m.id_entrega = e.id      
                         INNER JOIN Productos AS pr
                                 ON  m.id_producto = pr.id                  
@@ -416,7 +416,7 @@ async function MovimientosPorPeriodo (tabla, data) {
                                 ON  m.id_vendedor = u.id              
                         INNER JOIN tipo_pago AS p 
                                 ON  m.id_pago = p.id               
-                        INNER JOIN Tipo_entrega AS e 
+                        INNER JOIN tipo_entrega AS e 
                                 ON  m.id_entrega = e.id      
                         INNER JOIN Productos AS pr
                                 ON  m.id_producto = pr.id                  
@@ -1306,7 +1306,7 @@ async function InventarioAgente( consulta) {
                 `SELECT i.id, i.nombre_lote,  i.stock_total, i.fh_ingreso, i.precio_compra,
                  i.precio_compra_lote, u.nombre as Sucursal, i.estatus, u.id as IdSucursal, i.costo_transporte, i.origen_lote  
                  FROM inventario as i 
-                INNER JOIN  almacenes AS U	
+                INNER JOIN  almacenes AS u	
                     ON  i.id_almacen = u.id
                 WHERE i.estatus = ?`,
                  parametros // Pasar los parámetros como un array
@@ -1325,7 +1325,7 @@ async function InventarioAgente( consulta) {
                     FROM inventario as i
                 INNER JOIN  productos as p
                     on i.id_producto = p.id
-                INNER JOIN  almacenes AS U	
+                INNER JOIN  almacenes AS u
                     ON  i.id_ubicacion = u.id
                 WHERE i.estatus = ?`,
                 parametros // Pasar los parámetros como un array
