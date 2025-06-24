@@ -74,8 +74,8 @@ async function todos(tabla, data) {
 
     } finally {
         // Liberar la conexión después de la consulta
-        if (conexion) {
-            conexion.release();
+        if (conexion) {            
+            await conexion.close(); 
             console.log("Conexión liberada.");
         }
     }
@@ -113,7 +113,8 @@ async function insertar(tabla, data) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+          
+             await conexion.close(); 
             console.log("Conexión liberada tras la inserción");
         }
     }
@@ -144,7 +145,8 @@ async function actualizar(tabla, data) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras la actualización");
         }
     }
@@ -213,7 +215,8 @@ async function baja(tabla, consulta) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras baja");
         }
     }
@@ -249,7 +252,8 @@ async function query(tabla, consulta) {
     } finally {
         // Liberar la conexión después de la consulta
         if (conexion) {
-            conexion.release();
+            
+            await conexion.close(); 
             console.log("Conexión liberada.");
         }
     }
@@ -363,7 +367,8 @@ async function Movimientos(tabla, data) {
     } finally {
         // Liberar la conexión
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras la consulta.");
         }
     }
@@ -452,7 +457,8 @@ async function MovimientosPorPeriodo (tabla, data) {
     } finally {
         // Liberar la conexión
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras la consulta.");
         }
     }
@@ -521,7 +527,7 @@ async function ResumenMovimientos (tabla, data) {
     } finally {
         // Liberar la conexión
         if (conexion) {
-            conexion.release();
+             await conexion.close(); 
             console.log("Conexión liberada tras la consulta.");
         }
     }
@@ -567,7 +573,8 @@ async function clientesAutocomplete(query) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras clientesAutocomplete");
         }
     }
@@ -603,8 +610,8 @@ async function productoAutocomplete(tabla,query) {
 
     } finally {
         // Liberar la conexión si se obtuvo
-        if (conexion) {
-            conexion.release();
+        if (conexion) {            
+             await conexion.close(); 
             console.log("Conexión liberada tras productoAutocomplete");
         }
     }
@@ -642,8 +649,8 @@ async function usuarioAutocomplete (tabla,query) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
-            console.log("Conexión liberada tras productoAutocomplete");
+            await conexion.close(); 
+            console.log("Conexión liberada tras usuarioAutocomplete");
         }
     }
 }
@@ -690,7 +697,8 @@ async function vendedorAutocomplete(query) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras clientesAutocomplete");
         }
     }
@@ -731,7 +739,8 @@ async function todosAgente(tabla, data) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+            await conexion.close(); 
             console.log("Conexión liberada tras la consulta.");
         }
     }
@@ -766,7 +775,7 @@ async function todosAlmacenes( data) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+             await conexion.close(); 
             console.log("Conexión liberada tras la consulta.");
         }
     }
@@ -806,7 +815,7 @@ async function todosAgenteProducto(tabla, data) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+             await conexion.close(); 
             console.log("Conexión liberada tras la consulta.");
         }
     }
@@ -847,7 +856,8 @@ async function todosDetalleCompra (tabla, data) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras la consulta.");
         }
     }
@@ -899,7 +909,8 @@ async function inventarioDetalle(tabla, data) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras la consulta.");
         }
     }
@@ -948,7 +959,7 @@ async function inventarioproducto(tabla, data) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+             await conexion.close();  
             console.log("Conexión liberada tras la consulta.");
         }
     }
@@ -1028,7 +1039,8 @@ async function UsuariosAgente(tabla, consulta) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras UsuariosAgente");
         }
     }
@@ -1072,7 +1084,8 @@ async function validaUsuario(tabla, consulta) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras validaUsuario");
         }
     }
@@ -1117,7 +1130,7 @@ async function login(tabla, consulta) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+             await conexion.close(); 
             console.log("Conexión liberada tras login");
         }
     }
@@ -1157,7 +1170,8 @@ async function hitMaximo (tabla, consulta) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras hitMaximo ");
         }
     }; 
@@ -1193,7 +1207,8 @@ async function rendimiento (tabla, consulta) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+           
+            await conexion.close(); 
             console.log("Conexión liberada tras baja");
         }
     }
@@ -1237,12 +1252,12 @@ async function ProductosAutocomplete(query) {
 
     } finally {
         // Liberar la conexión si se obtuvo
-        if (conexion) {
-            conexion.release();
-            console.log("Conexión liberada tras productos autocomplete");
-        }
+        if (conexion) {         
+            await conexion.close();  
+            console.log("Conexión liberada tras ** ProductosAutocomplete");
+        } 
     }
-}
+} 
 
 async function PiezasAutocomplete(query) {
     let conexion;
@@ -1283,7 +1298,8 @@ async function PiezasAutocomplete(query) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras productos autocomplete");
         }
     }
@@ -1343,7 +1359,8 @@ async function InventarioAgente( consulta) {
     } finally {
         // Liberar la conexión si se obtuvo
         if (conexion) {
-            conexion.release();
+            
+             await conexion.close(); 
             console.log("Conexión liberada tras UsuariosAgente");
         }
     }
@@ -1393,8 +1410,8 @@ async function inventarioPiezas(tabla, consulta) {
 
     } finally {
         // Liberar la conexión si se obtuvo
-        if (conexion) {
-            conexion.release();
+        if (conexion) {            
+             await conexion.close(); 
             console.log("Conexión liberada tras UsuariosAgente");
         }
     }
