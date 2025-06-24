@@ -424,7 +424,7 @@ async function MovimientosPorPeriodo (tabla, data) {
                 [data.estatus]  // Asumimos que un ADMIN puede consultar todos los agentes con el estatus dado
             );
             return result;
-        }
+        }  
 
         // Acción para el rol "CLIENTE"  **Pendiente de definir   
         if (data.roluser === "CLIENTE") { 
