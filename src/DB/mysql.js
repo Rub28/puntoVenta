@@ -279,7 +279,7 @@ async function Movimientos(tabla, data) {
                                 ON  m.id_pago = p.id             
                         INNER JOIN tipo_entrega AS e 
                                 ON  m.id_entrega = e.id      
-                        INNER JOIN Productos AS pr 
+                        INNER JOIN productos AS pr 
                                 ON  m.id_producto = pr.id                  
                         WHERE m.estatus = ? AND C.id_agente =  ?  
                           and u.id_sucursal =  ?  `, 
@@ -305,7 +305,7 @@ async function Movimientos(tabla, data) {
                                 ON  m.id_pago = p.id               
                         INNER JOIN tipo_entrega AS e 
                                 ON  m.id_entrega = e.id      
-                        INNER JOIN Productos AS pr
+                        INNER JOIN productos AS pr
                                 ON  m.id_producto = pr.id                  
                             WHERE m.estatus = ? `,
                           [data.estatus]  // Asumimos que un ADMIN puede consultar todos los agentes con el estatus dado
@@ -326,7 +326,7 @@ async function Movimientos(tabla, data) {
                                         ON  m.id_pago = p.id               
                                 INNER JOIN tipo_entrega AS e 
                                         ON  m.id_entrega = e.id      
-                                INNER JOIN Productos AS pr
+                                INNER JOIN productos AS pr
                                         ON  m.id_producto = pr.id                  
                                     WHERE m.estatus = ? and u.id_sucursal = ? `,
                                     [data.estatus, data.id_sucursal]  // Asumimos que un ADMIN puede consultar todos los agentes con el estatus dado
@@ -394,7 +394,7 @@ async function MovimientosPorPeriodo (tabla, data) {
                                 ON  m.id_pago = p.id               
                         INNER JOIN tipo_entrega AS e 
                                 ON  m.id_entrega = e.id      
-                        INNER JOIN Productos AS pr
+                        INNER JOIN productos AS pr
                                 ON  m.id_producto = pr.id                  
                         WHERE m.estatus = ? AND C.id_agente =  ?`, 
                         [data.estatus, data.id_agente]
@@ -418,7 +418,7 @@ async function MovimientosPorPeriodo (tabla, data) {
                                 ON  m.id_pago = p.id               
                         INNER JOIN tipo_entrega AS e 
                                 ON  m.id_entrega = e.id      
-                        INNER JOIN Productos AS pr
+                        INNER JOIN productos AS pr
                                 ON  m.id_producto = pr.id                  
                             WHERE m.estatus = ? `,
                 [data.estatus]  // Asumimos que un ADMIN puede consultar todos los agentes con el estatus dado
@@ -478,7 +478,7 @@ async function ResumenMovimientos (tabla, data) {
                                 ON  m.id_vendedor = u.id              
                         INNER JOIN tipo_pago AS p 
                                 ON  m.id_pago = p.id               
-                        INNER JOIN Productos AS pr
+                        INNER JOIN productos AS pr
                                 ON  m.id_producto = pr.id    
                         where m.id > 0 
                         Group by m.fh_venta, p.id,  p.forma_pago, pr.nombre `
@@ -498,7 +498,7 @@ async function ResumenMovimientos (tabla, data) {
                                 ON  m.id_vendedor = u.id              
                         INNER JOIN tipo_pago AS p 
                                 ON  m.id_pago = p.id               
-                        INNER JOIN Productos AS pr
+                        INNER JOIN productos AS pr
                                 ON  m.id_producto = pr.id    
                         where m.id > 0 
                         Group by m.fh_venta, p.id,  p.forma_pago, pr.nombre `
