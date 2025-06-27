@@ -941,7 +941,7 @@ async function inventarioproducto(tabla, data) {
         }
         */ 
             const [result] = await conexion.execute(               
-                  ` select i.id, i.id_inventario_det, i.id_producto, p.nombre, i.estatus  
+                  ` select i.id, i.id_inventario_det, i.id_producto, p.nombre, i.estatus, i.cantidad_productos  
                       from inventario_producto i  
                      INNER join productos p 
                         ON p.id = i.id_producto  
