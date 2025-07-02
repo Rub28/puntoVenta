@@ -10,6 +10,7 @@ const router = express.Router();
 router.put('/bajaImagen', bajaImagen);
 router.get('/autocomplete', ClientesAutocomplete);
 router.get('/productoAutocomplete', productoAutocomplete);
+router.post('/llenadoCombo', llenadocombo); 
 router.post('/todosagente', todosAgente);
 router.get('/', todos);
 router.get('/:id', uno);
@@ -27,6 +28,17 @@ async function todos(req,res, next){
    } catch (error) {
       next(error)
    }  
+}
+
+async function llenadocombo(req,res, next){ 
+
+   console.log(" -- llenadoCombo req.body", req.body)
+   try {
+      const items = await controlador.llenadocombo(req.body)
+         respuestas.success(req, res, items, 200)
+   } catch (error) {
+         next(error)
+   }
 }
 
 async function uno (req,res, next){

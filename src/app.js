@@ -14,6 +14,8 @@ const auth = require('./modulos/auth/rutas');
 const productos = require('./modulos/Productos/rutas');
 const inventario = require('./modulos/Inventario/rutas'); 
 const almacen = require('./modulos/Almacen/rutas');
+const catProducto = require('./modulos/CatProducto/rutas');
+const catalogos = require('./modulos/CatMarcas/rutas');
 const error = require('./Respuestas/errors');
 const InventarioDet = require('./modulos/InventarioDet/rutas');
 const InventarioPieza = require('./modulos/InventarioPiezas/rutas'); 
@@ -33,11 +35,14 @@ app.set('port', config.app.port);
 app.use(cors());  
 
 app.use('/api/almacen', almacen)
+app.use('/api/CatProducto', catProducto)
+app.use('/api/CatMarcas', catalogos)
 app.use('/api/Inventario', inventario)
 app.use('/api/InventarioDet', InventarioDet) 
 app.use('/api/InventarioPiezas', InventarioPieza) 
 app.use('/api/InventarioProductos', InventarioProducto)   
 app.use('/api/productos', productos)
+app.use('/api/productos/llenadoCombo', productos)
 app.use('/api/productos/productoAutocomplete', productos)
 app.use('/api/clientes', clientes)
 app.use('/api/clientes/autocomplete', clientes)

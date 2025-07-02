@@ -28,7 +28,7 @@ module.exports = function(dbinyectada) {
 
     
     function Movimientos(body){
-        console.log("body", body)
+        console.log("body Movimientos: ", body)
         return db.Movimientos(TABLA, body)
     }
     

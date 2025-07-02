@@ -50,6 +50,11 @@ module.exports = function(dbinyectada) {
         return db.todosAgenteProducto('img_producto', body);
     }
 
+       
+    function llenadocombo(body){
+        return db.todos(body.tabla, body);
+    }
+ 
     return {
         todos,
         uno,
@@ -60,6 +65,7 @@ module.exports = function(dbinyectada) {
         todosAgente,
         agregarImg,
         bajaImg,
-        todosAgenteImg
+        todosAgenteImg, 
+        llenadocombo
     }
 }
