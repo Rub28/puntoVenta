@@ -1,7 +1,8 @@
 
 require('dotenv') 
 
-// Desarrollo  
+// Desarrollo   
+/*
 module.exports = {
     app: {
         port: process.env.PORT || 4001
@@ -17,11 +18,9 @@ module.exports = {
         port: process.env.PORT_BD || 3306  
     }   
 }     
-
-
-
+*/ 
 // Productvo 
-/*
+
 module.exports = {
     app: {
         port: process.env.PORT || 4004 
@@ -37,4 +36,4 @@ module.exports = {
         port: process.env.PORT_BD || 3306  
     }   
 }         
-*/
+
