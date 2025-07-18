@@ -2,9 +2,11 @@ const express = require('express')
 const respuestas = require('../../Respuestas/respuestas')
 const controlador = require('./index');
 
+
 const router = express.Router();
 router.get('/autocomplete', ProductosAutocomplete);
 router.post('/todosagente', todosAgente);
+router.post('/actualizaProrrateo', actualizaProrrateo);
 router.get('/', todos);
 router.get('/:id', uno);
 router.post('/', agregar);
@@ -71,6 +73,15 @@ async function todosAgente (req,res, next){
    try {
       const items = await controlador.todosAgente(req.body)
          respuestas.success(req, res, items, 200)
+   } catch (error) {
+         next(error)
+   }
+}
+
+async function actualizaProrrateo (req,res, next){
+   try {
+      const items = await controlador.actualizaProrrateo(req.body)
+         respuestas.success(req, res, 'Registro dado baja correctamente', 200)
    } catch (error) {
          next(error)
    }

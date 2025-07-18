@@ -29,6 +29,10 @@ module.exports = function(dbinyectada) {
         return db.ProductosAutocomplete(query);
     }
 
+   function actualizaProrrateo (body){
+        return db.actualizaProrrateo(TABLA, body);
+    }
+
     function todosAgente(body){
         return db.inventarioproducto(TABLA, body);
     }
@@ -38,6 +42,7 @@ module.exports = function(dbinyectada) {
         baja,
         agregar,
         ProductosAutocomplete,
-        todosAgente
+        todosAgente, 
+        actualizaProrrateo 
     }
 }

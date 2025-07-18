@@ -57,7 +57,7 @@ app.use(error);
 
    
 // Cargar los certificados de Let's Encrypt
-
+// solo para produccion. 
 const options = {
     key: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/privkey.pem')),
     cert: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/fullchain.pem')),

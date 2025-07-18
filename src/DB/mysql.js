@@ -121,6 +121,41 @@ async function insertar(tabla, data) {
 }
 
 
+async function actualizaProrrateo(tabla, data) {
+    let conexion;
+    console.log(' Actualiza Prorrateo --> data: ', data);  
+
+    try {
+        // Obtener la conexión desde el pool
+        conexion = await conexiondb();
+
+        // Ejecutar la consulta de actualización usando placeholders con nombre
+        const [result] = await conexion.execute(
+         //   `UPDATE ${tabla} SET ${Object.keys(data).map(key => `${key} = :${key}`).join(', ')}  WHERE id_inventario = :id_inventario `, 
+            ` UPDATE ${tabla}  SET costo_transporte = costo_interno * :porcentaje,  
+                                    costo_total = costo_interno + costo_transporte  
+               WHERE id_inventario = :id_inventario             `,  
+                data // Pasar el objeto directamente  
+        ); 
+
+        // Retornar el resultado de la actualización
+        return result;
+
+    } catch (error) {
+        console.error("Error al actualizaProrrateo los datos:", error);
+        throw error; // Lanzamos el error para que lo maneje el bloque llamante
+
+    } finally {
+        // Liberar la conexión si se obtuvo
+        if (conexion) {
+            
+             await conexion.close(); 
+            console.log("Conexión liberada tras la actualización");
+        }
+    }
+}
+
+
 async function actualizar(tabla, data) {
     let conexion;
     console.log(' actualizar --> data: ', data);  
@@ -941,12 +976,19 @@ async function inventarioproducto(tabla, data) {
         }
         */ 
             const [result] = await conexion.execute(               
-                  ` select i.id, i.id_inventario_det, i.id_producto, p.nombre, i.estatus, i.cantidad_productos  
+                  ` select i.id, i.id_inventario, i.id_producto, p.nombre, i.estatus, i.cantidad_productos, 
+                           i.id_estatus_prod, s.nombre as nom_estado_prod, i.registro_unico,  
+                           i.id_estatus_origen_prod, o.nombre as nom_estatus_origen_prod,  
+                           i.num_producto, i.costo_interno, i.costo_total, i.costo_transporte 
                       from inventario_producto i  
                      INNER join productos p 
-                        ON p.id = i.id_producto  
-                     where  i.id_inventario_det = ?  and  i.estatus = ?  `, 
-                [data.id_inventario_det, data.estatus]  // Pasar 'data.estatus' y 'data.id_agente' como array
+                        ON p.id = i.id_producto 
+                    INNER join cat_estatus_prod s 
+                        ON s.id = i.id_estatus_prod  
+                    INNER join cat_estatus_origen_prod o  
+                        ON o.id = i.id_estatus_origen_prod                              
+                     where  i.id_inventario = ?  and  i.estatus = ?  `, 
+                [data.id_inventario, data.estatus]  // Pasar 'data.estatus' y 'data.id_agente' como array
             );
             return result;
               
@@ -1225,7 +1267,7 @@ async function ProductosAutocomplete(query) {
         let consultas = "";
         const termino = query.query;
         if (query.roluser === "ADMIN") {
-            consultas = 'SELECT id, nombre as nom_cliente, precio_venta, stock_actual FROM productos WHERE nombre LIKE ?';
+            consultas = 'SELECT id, nombre as nom_cliente  FROM productos WHERE nombre LIKE ?';
             // Ejecutar la consulta usando los parámetros en un array
             const [result] = await conexion.execute(
                 consultas,
@@ -1319,12 +1361,10 @@ async function InventarioAgente( consulta) {
             console.log("parametros", parametros)
             // Ejecutar la consulta usando los parámetros en un array
             const [result] = await conexion.execute(
-                `SELECT i.id, i.nombre_lote,  i.stock_total, i.fh_ingreso, i.precio_compra,
-                 i.precio_compra_lote, u.nombre as Sucursal, i.estatus, u.id as IdSucursal, i.costo_transporte, i.origen_lote  
-                 FROM inventario as i 
-                INNER JOIN  almacenes AS u	
-                    ON  i.id_almacen = u.id
-                WHERE i.estatus = ?`,
+                `SELECT i.id, i.nombre_lote,  i.stock_total, i.fh_ingreso, i.precio_compra, i.fh_entrega, 
+                 i.precio_compra_lote, i.estatus,  i.costo_transporte, i.origen_lote  
+                 FROM inventario as i  
+                WHERE i.estatus = ?`,  
                  parametros // Pasar los parámetros como un array
             );
 
@@ -1447,5 +1487,6 @@ module.exports = {
     inventarioPiezas, 
     inventarioproducto, 
     todosAgenteProducto, 
-    todosAlmacenes
+    todosAlmacenes, 
+    actualizaProrrateo
 }
