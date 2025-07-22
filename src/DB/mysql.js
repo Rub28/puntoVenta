@@ -132,9 +132,10 @@ async function actualizaProrrateo(tabla, data) {
         // Ejecutar la consulta de actualización usando placeholders con nombre
         const [result] = await conexion.execute(
          //   `UPDATE ${tabla} SET ${Object.keys(data).map(key => `${key} = :${key}`).join(', ')}  WHERE id_inventario = :id_inventario `, 
-            ` UPDATE ${tabla}  SET costo_transporte = costo_interno * :porcentaje,  
-                                    costo_total = costo_interno + costo_transporte  
-               WHERE id_inventario = :id_inventario             `,  
+            ` UPDATE ${tabla}  SET  costo_transporte = (costo_interno / :costoTotal) * :costoTransporte,  
+                                    costo_total =  costo_transporte + costo_interno 
+               WHERE estatus = 'A'
+                 and id_inventario = :id_inventario  `,  
                 data // Pasar el objeto directamente  
         ); 
 
@@ -1361,11 +1362,10 @@ async function InventarioAgente( consulta) {
             console.log("parametros", parametros)
             // Ejecutar la consulta usando los parámetros en un array
             const [result] = await conexion.execute(
-                `SELECT i.id, i.nombre_lote,  i.stock_total, i.fh_ingreso, i.precio_compra, i.fh_entrega, 
-                 i.precio_compra_lote, i.estatus,  i.costo_transporte, i.origen_lote  
-                 FROM inventario as i  
-                WHERE i.estatus = ?`,  
-                 parametros // Pasar los parámetros como un array
+                `SELECT * FROM inventario as i  
+                  WHERE i.estatus = ? `,  
+                 parametros // Pasar los parámetros como un array 
+                 // i.id, i.nombre_lote,  i.stock_total, i.fh_ingreso, i.precio_compra, i.fh_entrega,  i.precio_compra_lote, i.estatus,  i.costo_transporte, i.origen_lote  
             );
 
             // Retornar el primer resultado (suponiendo que solo hay uno)
