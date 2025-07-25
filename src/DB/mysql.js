@@ -132,15 +132,24 @@ async function actualizaProrrateo(tabla, data) {
         // Ejecutar la consulta de actualización usando placeholders con nombre
         const [result] = await conexion.execute(
          //   `UPDATE ${tabla} SET ${Object.keys(data).map(key => `${key} = :${key}`).join(', ')}  WHERE id_inventario = :id_inventario `, 
-            ` UPDATE ${tabla}  SET  costo_transporte = (costo_interno / :costoTotal) * :costoTransporte,  
+            ` UPDATE ${tabla}  SET  costo_transporte = (:costoTransporte / :totalCostolote) * costo_interno,  
                                     costo_total =  costo_transporte + costo_interno 
                WHERE estatus = 'A'
                  and id_inventario = :id_inventario  `,  
                 data // Pasar el objeto directamente  
         ); 
 
+           const [result1] = await conexion.execute(
+         //   `UPDATE ${tabla} SET ${Object.keys(data).map(key => `${key} = :${key}`).join(', ')}  WHERE id_inventario = :id_inventario `, 
+            ` UPDATE inventario SET  precio_compra = :totalCostolote ,  
+                                     precio_compra_lote = :totalCostolote 
+               WHERE estatus = 'A'
+                 and id = :id_inventario  `,  
+                data // Pasar el objeto directamente  
+        ); 
+
         // Retornar el resultado de la actualización
-        return result;
+        return result; 
 
     } catch (error) {
         console.error("Error al actualizaProrrateo los datos:", error);
