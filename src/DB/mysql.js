@@ -142,7 +142,8 @@ async function actualizaProrrateo(tabla, data) {
            const [result1] = await conexion.execute(
          //   `UPDATE ${tabla} SET ${Object.keys(data).map(key => `${key} = :${key}`).join(', ')}  WHERE id_inventario = :id_inventario `, 
             ` UPDATE inventario SET  precio_compra = :totalCostolote ,  
-                                     precio_compra_lote = :totalCostolote 
+                                     precio_compra_lote = :totalCostolote,  
+                                     stock_total = :stock_total
                WHERE estatus = 'A'
                  and id = :id_inventario  `,  
                 data // Pasar el objeto directamente  
