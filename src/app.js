@@ -14,12 +14,13 @@ const auth = require('./modulos/auth/rutas');
 const productos = require('./modulos/Productos/rutas');
 const inventario = require('./modulos/Inventario/rutas'); 
 const almacen = require('./modulos/Almacen/rutas');
-const catProducto = require('./modulos/CatProducto/rutas');
+const catProducto = require('./modulos/CatProducto/rutas'); 
 const catalogos = require('./modulos/CatMarcas/rutas');
 const error = require('./Respuestas/errors');
 const InventarioDet = require('./modulos/InventarioDet/rutas');
 const InventarioPieza = require('./modulos/InventarioPiezas/rutas'); 
 const InventarioProducto = require('./modulos/InventarioProducto/rutas'); 
+const CatTasasBanco = require('./modulos/CatTasasBanco/rutas');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use('/api/InventarioDet', InventarioDet)
 app.use('/api/InventarioPiezas', InventarioPieza) 
 app.use('/api/InventarioProductos', InventarioProducto)   
 app.use('/api/productos', productos)
+app.use('/api/CatTasasBanco', CatTasasBanco)
 app.use('/api/productos/llenadoCombo', productos)
 app.use('/api/productos/productoAutocomplete', productos)
 app.use('/api/clientes', clientes)
@@ -58,6 +60,7 @@ app.use(error);
    
 // Cargar los certificados de Let's Encrypt
 // solo para produccion. 
+
 const options = {
     key: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/privkey.pem')),
     cert: fs.readFileSync(path.join('/etc/letsencrypt/live/srv743626.hstgr.cloud/fullchain.pem')),
@@ -68,4 +71,5 @@ const options = {
     console.log('Servidor HTTPS escuchando en el puerto 4005');
   }); 
  
+
 module.exports =app;
