@@ -1372,8 +1372,13 @@ async function InventarioAgente( consulta) {
             console.log("parametros", parametros)
             // Ejecutar la consulta usando los parámetros en un array
             const [result] = await conexion.execute(
-                `SELECT * FROM inventario as i  
-                  WHERE i.estatus = ? `,  
+                `   Select t.num_lote, t.nombre_lote, t.fh_entrega,  i.num_producto, p.nombre, i.registro_unico,  i.costo_interno, i.costo_transporte, i.costo_total,  
+                        eo.nombre as nom_estatus_origen,  ep.nombre as nom_estatus_producto 
+                    from inventario_producto i, productos p, inventario t, cat_estatus_origen_prod eo, cat_estatus_prod ep    
+                    Where i.id_producto =  p.id 
+                    and t.id =  i.id_inventario 
+                    and eo.id = i.id_estatus_origen_prod  
+                    and ep.id = i.id_estatus_prod  `,  
                  parametros // Pasar los parámetros como un array 
                  // i.id, i.nombre_lote,  i.stock_total, i.fh_ingreso, i.precio_compra, i.fh_entrega,  i.precio_compra_lote, i.estatus,  i.costo_transporte, i.origen_lote  
             );
