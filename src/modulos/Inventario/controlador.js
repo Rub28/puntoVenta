@@ -28,7 +28,7 @@ module.exports = function(dbinyectada) {
     function ProductosAutocomplete(query){
         return db.ProductosAutocomplete(query);
     }
-
+   
     function todosAgente(body){
         return db.InventarioAgente( body );
     }
