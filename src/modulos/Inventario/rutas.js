@@ -2,9 +2,11 @@ const express = require('express')
 const respuestas = require('../../Respuestas/respuestas')
 const controlador = require('./index');
 
+
 const router = express.Router();
 router.get('/autocomplete', ProductosAutocomplete);
 router.post('/todosagente', todosAgente);
+router.post('/inventarioLote', inventarioLote);
 router.get('/', todos);
 router.get('/:id', uno);
 router.post('/', agregar);
@@ -76,4 +78,14 @@ async function todosAgente (req,res, next){
    }
 }
 
-module.exports = router;   
+async function inventarioLote (req,res, next){
+   console.log("req.body", req.body)
+   try {
+      const items = await controlador.inventarioLote(req.body)
+         respuestas.success(req, res, items, 200)
+   } catch (error) {
+         next(error)
+   }
+}
+
+module.exports = router;    

@@ -1432,11 +1432,12 @@ async function inventarioLote ( consulta) {
         // Asegurarse de que consulta es un objeto con propiedades
         console.log("consulta.roluser", consulta.roluser)
         if (consulta.roluser === "ADMIN") {
-            const parametros = [consulta.id_estatus_prod];
+            const parametros = [consulta.estatus];  
             console.log("parametros", parametros)
             // Ejecutar la consulta usando los parámetros en un array
             const [result] = await conexion.execute(
-                `  SELECT * FROM inventario  `,  
+                `  SELECT * FROM inventario  
+                   where estatus = ? `,  
                  parametros // Pasar los parámetros como un array 
                  // i.id, i.nombre_lote,  i.stock_total, i.fh_ingreso, i.precio_compra, i.fh_entrega,  i.precio_compra_lote, i.estatus,  i.costo_transporte, i.origen_lote  
             );

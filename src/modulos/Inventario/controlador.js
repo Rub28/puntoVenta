@@ -32,12 +32,18 @@ module.exports = function(dbinyectada) {
     function todosAgente(body){
         return db.InventarioAgente( body );
     }
+
+    function inventarioLote (body){
+        return db.inventarioLote( body );
+    }
+    
     return {
         todos,
         uno,
         baja,
         agregar,
         ProductosAutocomplete,
+        inventarioLote,  
         todosAgente
     }
 }
