@@ -1422,6 +1422,56 @@ async function InventarioAgente( consulta) {
     }
 }
 
+
+async function inventarioLote ( consulta) {
+    let conexion;
+    try {
+        // Obtener la conexión desde el pool
+        conexion = await conexiondb();
+
+        // Asegurarse de que consulta es un objeto con propiedades
+        console.log("consulta.roluser", consulta.roluser)
+        if (consulta.roluser === "ADMIN") {
+            const parametros = [consulta.id_estatus_prod];
+            console.log("parametros", parametros)
+            // Ejecutar la consulta usando los parámetros en un array
+            const [result] = await conexion.execute(
+                `  SELECT * FROM inventario  `,  
+                 parametros // Pasar los parámetros como un array 
+                 // i.id, i.nombre_lote,  i.stock_total, i.fh_ingreso, i.precio_compra, i.fh_entrega,  i.precio_compra_lote, i.estatus,  i.costo_transporte, i.origen_lote  
+            );
+
+            // Retornar el primer resultado (suponiendo que solo hay uno)
+            return result || null; // Si no hay coincidencias, se devuelve null
+        }
+        if (consulta.roluser === "VENDEDOR") {
+            const parametros = [consulta.id_agente, consulta.estatus];
+            console.log("parametros", parametros)
+            // Ejecutar la consulta usando los parámetros en un array
+            const [result] = await conexion.execute(
+                ` SELECT * FROM inventario  `,
+                parametros // Pasar los parámetros como un array
+            );
+
+            // Retornar el primer resultado (suponiendo que solo hay uno)
+            return result || null; // Si no hay coincidencias, se devuelve null
+
+        }
+
+    } catch (error) {
+        console.error("Error en el login:", error);
+        throw error; // Lanzamos el error para que lo maneje el bloque llamante
+
+    } finally {
+        // Liberar la conexión si se obtuvo
+        if (conexion) {
+            
+             await conexion.close(); 
+            console.log("Conexión liberada tras UsuariosAgente");
+        }
+    }
+}
+
 async function inventarioPiezas(tabla, consulta) {
     let conexion;
     try {
@@ -1498,7 +1548,8 @@ module.exports = {
     ProductosAutocomplete, 
     usuarioAutocomplete,  
     PiezasAutocomplete, 
-    InventarioAgente,  
+    InventarioAgente, 
+    inventarioLote,   
     inventarioDetalle, 
     inventarioPiezas, 
     inventarioproducto, 
