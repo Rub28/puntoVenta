@@ -133,7 +133,10 @@ async function actualizaProrrateo(tabla, data) {
         const [result] = await conexion.execute(
          //   `UPDATE ${tabla} SET ${Object.keys(data).map(key => `${key} = :${key}`).join(', ')}  WHERE id_inventario = :id_inventario `, 
             ` UPDATE ${tabla}  SET  costo_transporte = (:costoTransporte / :totalCostolote) * costo_interno,  
-                                    costo_total =  costo_transporte + costo_interno 
+                                    costo_total =  costo_transporte + costo_interno, 
+                                    precio_ideal = costo_total * 1.5,  
+                                    precio_minimo = costo_total * 1.3,   
+                                    precio_mayoreo = costo_total * 1.2   
                WHERE estatus = 'A'
                  and id_inventario = :id_inventario  `,  
                 data // Pasar el objeto directamente  
@@ -1373,7 +1376,8 @@ async function InventarioAgente( consulta) {
             // Ejecutar la consulta usando los parámetros en un array
             const [result] = await conexion.execute(
                 `   Select t.num_lote, t.nombre_lote, t.fh_entrega,  i.num_producto, p.nombre, i.registro_unico,  i.costo_interno, i.costo_transporte, i.costo_total,  
-                        eo.nombre as nom_estatus_origen,  ep.nombre as nom_estatus_producto, i.id_estatus_prod, t.stock_total,  t.precio_compra, t.fh_ingreso, t.id  
+                        eo.nombre as nom_estatus_origen,  ep.nombre as nom_estatus_producto, i.id_estatus_prod, t.stock_total,  t.precio_compra, t.fh_ingreso, i.id,  
+                        i.precio_mayoreo,  i.precio_minimo, i.precio_ideal, i.precio_cliente   
                     from inventario_producto i, productos p, inventario t, cat_estatus_origen_prod eo, cat_estatus_prod ep    
                     Where i.id_producto =  p.id 
                     and t.id =  i.id_inventario 
