@@ -22,6 +22,7 @@ const InventarioPieza = require('./modulos/InventarioPiezas/rutas');
 const InventarioProducto = require('./modulos/InventarioProducto/rutas'); 
 const CatTasasBanco = require('./modulos/CatTasasBanco/rutas');
 
+
 const app = express();
 
 // Middleware
@@ -39,6 +40,7 @@ app.use('/api/almacen', almacen)
 app.use('/api/CatProducto', catProducto)
 app.use('/api/CatMarcas', catalogos)
 app.use('/api/Inventario', inventario)
+app.use('/api/Inventario/inventarioLote', inventario)
 app.use('/api/InventarioDet', InventarioDet) 
 app.use('/api/InventarioPiezas', InventarioPieza) 
 app.use('/api/InventarioProductos', InventarioProducto)   
